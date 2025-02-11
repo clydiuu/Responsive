@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <title>Navigation Bar with Propdown Menu</title>
+  </head>
+  <body>
+    <header id="nav-menu" aria-label="navigation bar" >
+      <div class="container-nav" style="height: 60px; background-color: #0a5daac9;">
+        <div class="nav-start">
+          <img src="../assets/images/image-removebg-preview.png" 
+          alt="logo" class="logo" style="height: 50px; width: 50px; margin-top: 5px;"/>
+
+          <nav class="menu">
+            <ul class="menu-bar">
+              <li><a class="nav-link" href="/">Dashboard</a></li>
+              <li>
+                <button
+                  class="nav-link dropdown-btn"
+                  data-dropdown="dropdown1"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                  aria-label="Procedures"
+                >
+                  Procedures
+                  <i class="bx bx-chevron-down" aria-hidden="true"></i>
+                </button>
+                <div id="dropdown1" class="dropdown">
+                  <ul role="menu">
+                    <li role="menuitem">
+                      <a class="dropdown-link" href="#best-of-the-day">
+                        <img src="./assets/icons/botd.svg" class="icon" />
+                        <div>
+                          <span class="dropdown-link-title"
+                            >Add Patients</span
+                          >
+                          <p>Add patients on their respective stations & beds</p>
+                        </div>
+                      </a>
+                    </li>
+                    <li role="menuitem">
+                      <a class="dropdown-link" href="#featured-streams">
+                        <img src="./assets/icons/fs.svg" class="icon" />
+                        <div>
+                          <span class="dropdown-link-title"
+                            >Add Beds</span
+                          >
+                          <p>Add Beds to Assigned Stations</p>
+                        </div>
+                      </a>
+                    </li>
+                    <li role="menuitem">
+                      <a class="dropdown-link" href="#subscriptions">
+                        <img src="./assets/icons/sp.svg" class="icon" />
+                        <div>
+                          <span class="dropdown-link-title">Subscriptions</span>
+                          <p>Gain exclusive access</p>
+                        </div>
+                      </a>
+                    </li>
+                    <li role="menuitem">
+                      <a class="dropdown-link" href="#creative-feed">
+                        <img src="./assets/icons/cf.svg" class="icon" />
+                        <div>
+                          <span class="dropdown-link-title">Creative Feed</span>
+                          <p>See trending creations</p>
+                        </div>
+                      </a>
+                    </li>
+                  </ul>
+
+                  
+                </div>
+              </li>
+              <li>
+                <button
+                  class="nav-link dropdown-btn"
+                  data-dropdown="dropdown2"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                  aria-label="Features"
+                >
+                  Features
+                  <i class="bx bx-chevron-down" aria-hidden="true"></i>
+                </button>
+                <div id="dropdown2" class="dropdown">
+                  <ul role="menu">
+                    <li>
+                      <span class="dropdown-link-title">Categories</span>
+                    </li>
+                    <li role="menuitem">
+                      <a class="dropdown-link" href="/">Audit</a>
+                    </li>
+                    <li role="menuitem">
+                      <a class="dropdown-link" href="/">Location </a>
+                    </li>
+                    <li role="menuitem">
+                      <a class="dropdown-link" href="/">Generate reports </a>
+                    </li>
+                  </ul>
+                  
+                </div>
+              </li>
+              
+            </ul>
+          </nav>
+          
+        </div>
+        <div class="nav-mid">
+          <nav class="menu">
+            <ul class="menu-bar" style="height: 60px;">
+              <li>
+                <button
+                  class="nav-link dropdown-btn"
+                  data-dropdown="dropdown3"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                  aria-label="Stations"
+                >
+                <h1>
+                  Stations: <?php echo $_SESSION['station']?>
+                  <i class="bx bx-chevron-down" aria-hidden="true"></i>
+                </h1>
+                </button>
+                <div id="dropdown3" class="dropdown">
+                  <ul role="menu">
+                    <li>
+                      <span class="dropdown-link"><h4>Sign Out</h4></span>
+                    </li>
+                    
+                  </ul>
+                </div>
+              </li>
+            </ul>
+          </nav>
+        </div>
+        <div class="nav-end">
+          <div class="right-container">
+            <div class="datetime ">
+              <p class="navbar-brand  d-inline-flex p-4" id="datetime"></p>
+           <script>
+                 
+                 function updateDateTime() {
+             var now = new Date();
+       
+             // Options for the day
+             var dayOptions = {
+                 weekday: 'short',    // Full name of the day (e.g., Monday)
+             };  
+       
+             // Options for the date
+             var dateOptions = {
+                 year: 'numeric',    // Four-digit year
+                 month: 'short',      // Full name of the month (e.g., November)
+                 day: 'numeric',     // Day of the month
+             };
+       
+             // Options for the time
+             var timeOptions = {
+                 hour: '2-digit',    // 24-hour format for hours
+                 minute: '2-digit',  // Minutes with leading zeros
+                 second: '2-digit',  // Seconds with leading zeros
+                 hour12: false       // Use 24-hour format
+             };
+       
+             // Format the day, date, and time separately
+             var day = now.toLocaleDateString(undefined, dayOptions);
+             var date = now.toLocaleDateString(undefined, dateOptions);
+             var time = now.toLocaleTimeString(undefined, timeOptions);
+       
+             // Display them with separators
+             document.getElementById("datetime").innerHTML = `
+                 <div class="datetime">${time} |
+                 ${day} | ${date}</div>
+             `;
+                     }
+       
+                   // Update the time every second
+                   setInterval(updateDateTime, 1000);
+                   updateDateTime();
+       
+       
+       
+       
+              </script>
+           </div>
+
+           
+            
+          </div>
+
+          <button
+            id="hamburger"
+            aria-label="hamburger"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            <i class="bx bx-menu" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+    </header>
+    <script src="script.js"></script>
+  </body>
+</html>
